@@ -1,3 +1,4 @@
+import 'package:clothing_app/List_class.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,139 +9,113 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Image> clothlist = [
-    Image.asset('assets/Rectangle 325.png'),
-    Image.asset('assets/Fashion UI Design (Community)/Rectangle 325.png'),
-    Image.asset('assets/Fashion UI Design (Community)/Rectangle 325.png'),
-    Image.asset('assets/Fashion UI Design (Community)/Rectangle 325.png'),
-    Image.asset('assets/Fashion UI Design (Community)/Rectangle 325.png'),
-    Image.asset('assets/Fashion UI Design (Community)/Rectangle 325.png'),
+  List<Widget> image = [
+    Image.asset("assets/image1.png"),
+    Image.asset("assets/image2.png"),
+    Image.asset("assets/image3.png"),
+    Image.asset("assets/image4.png"),
+  ];
+  List<name> listname = [
+    name("21WN reversible angora", "Cardigan", "\$120"),
+    name("ClothName", 'fila', "\$123"),
+    name("ClothName", "Brand", '\$145'),
+    name("ClothName", "Brand", "\$155")
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(220, 190, 185, 185),
-          elevation: 0,
-          centerTitle: true,
-          title: Center(
-            child: Text(
-              '          Bag',
-              style:
-                  TextStyle(fontWeight: FontWeight.w300, color: Colors.black),
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 5,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            elevation: 0,
+            toolbarHeight: 50,
+            backgroundColor: Colors.white,
+            title: Center(
+              child: Text(
+                "New Produts",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: "All",
+                ),
+                Tab(
+                  text: "Apparel",
+                ),
+                Tab(
+                  text: "Dress",
+                ),
+                Tab(
+                  text: "T shirt",
+                ),
+                Tab(
+                  text: "Bag",
+                ),
+              ],
+              indicatorColor: Colors.black,
+              indicatorWeight: 2.0,
+              indicatorSize: TabBarIndicatorSize.tab,
+              labelColor: Colors.black,
+              isScrollable: true,
             ),
           ),
-          actions: [
-            Icon(
-              Icons.favorite_border,
-              color: Colors.black,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Icon(
-                Icons.shopping_bag,
-                color: Colors.black,
-              ),
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
+          body: Column(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    height: 450,
-                    width: 600,
-                    color: Color.fromARGB(220, 190, 185, 185),
-                    child: Image.asset('assets/Group_20-removebg-preview.png'),
-                  ),
-                  Positioned(
-                    bottom: 65,
-                    left: 10,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'womenses\'s bag',
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            'Oblong Bag',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 30),
-                          ),
-                          Text(
-                            '\$ 120.00',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400, fontSize: 18),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    '       You may also like',
-                    style: TextStyle(fontWeight: FontWeight.w300),
-                  )),
-              SizedBox(
-                height: 20,
-              ),
-              GridView.builder(
+              Expanded(
+                  child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 20),
+                    crossAxisCount: 2, // number of items in each row
+                    mainAxisSpacing: 7, // spacing between rows
+                    crossAxisSpacing: 0.9, // spacing between columns
+                    childAspectRatio: 0.690),
                 itemBuilder: (context, index) {
                   return Container(
-                    height: 200,
-                    width: 165,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
+                    child: Column(
+                      children: [
+                        SizedBox(width: 300, child: image[index]),
+                        Text(listname[index].ClothName),
+                        Text(listname[index].Brand),
+                        Text(listname[index].Amount)
+                      ],
                     ),
-                    child: clothlist[index],
+                    margin: EdgeInsets.all(10),
+                    height: 60,
+                    width: 71,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
                   );
                 },
-                itemCount: 6,
-                shrinkWrap: true,
-              )
+                itemCount: 4,
+              )),
+              TextButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Text(
+                        "                          Explore More",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        width: 7,
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black,
+                      )
+                    ],
+                  ))
             ],
           ),
         ),
-        bottomNavigationBar: Container(
-          height: 60,
-          decoration: BoxDecoration(
-            color: Colors.white70,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Icon(
-                Icons.search,
-              ),
-              Icon(Icons.save_alt),
-              Icon(Icons.home),
-              Icon(Icons.account_circle)
-            ],
-          ),
-        ));
+      ),
+    );
   }
 }
